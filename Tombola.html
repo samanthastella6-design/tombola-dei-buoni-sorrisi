@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<title>Tombola dei Buoni Sorrisi</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+ body { font-family: Arial, sans-serif; background:#0b3d29; color:#fff; text-align:center; padding:20px;}
+ .card {background:#fff; color:#000; padding:20px; margin-top:20px; display:inline-block;}
+ button {padding:10px 20px; font-size:16px;}
+ .number {display:inline-block; width:30px; height:30px; border:1px solid #000; margin:4px; line-height:30px;}
+ .marked {background:gold;}
+</style>
+</head>
+<body>
+<h1>Tombola dei Buoni Sorrisi</h1>
+<button onclick="generate()">Genera la mia cartella</button>
+<div id="card" class="card"></div>
+<script>
+function generate(){
+    const nums = [];
+    while(nums.length<20){
+        let n = Math.floor(Math.random()*90)+1;
+        if(!nums.includes(n)) nums.push(n);
+    }
+    nums.sort((a,b)=>a-b);
+    const card = document.getElementById('card');
+    card.innerHTML='';
+    nums.forEach(n=>{
+        const div=document.createElement('div');
+        div.className='number';
+        div.innerText=n;
+        div.onclick=()=>div.classList.toggle('marked');
+        card.appendChild(div);
+    });
+}
+</script>
+</body>
+</html>
